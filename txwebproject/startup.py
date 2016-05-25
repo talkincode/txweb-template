@@ -11,6 +11,7 @@ from txweb.permit import permit, load_handlers, load_events
 from txweb.redis_conf import redis_conf
 from txweb import utils
 from sqlalchemy.orm import scoped_session, sessionmaker
+from twisted.python import log
 
 
 def init(gdata):
@@ -39,7 +40,7 @@ def init(gdata):
     """
 
     appname = os.path.basename(gdata.app_dir)
-    utils.update_timezone(gdata.config.system.tz)
+    utils.update_tz(gdata.config.system.tz)
     syslog = logger.Logger(gdata.config,appname)
     dispatch.register(syslog)
     log.startLoggingWithObserver(syslog.emit, setStdout=0)
